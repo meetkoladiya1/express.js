@@ -1,50 +1,41 @@
 const express = require('express');
-const server = express();   // create server
 const morgan = require('morgan');
+const app = express();   
+const users = require("./friend.json");
+// console.log(users);
 
-server.use(morgan('dev'));
 
-const loggerFun = (req, res, next) => {
-    console.log(req.ip, req.url, req.method);
-    next();
-}
-server.use(loggerFun);
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
-// in-built middleware
-server.use(express.json());
-server.use(express.urlencoded({ extended: false}));
-server.use("/hello", express.static('public'));
 
-const myFun = (req, res, next) =>{
-    console.log(req.body);
-    next();
-    // if(req.query.age >= 18){
-    //     console.log('Success');
-    //     next();
-    // }else{
-    //     res.Json({message: "Sorry you are not allowed to visit this website ..."})
-    // }
-}
-
-// server.use(myFun);  // application
-
-// POST, GET PUT, PATCH, DELETE
-server.get('/', (req, res) => {
-    res.write('Welcome to Express');
-    res.end();
+app.get("/", (req, res) => {
+    res.send("Welcome to Express server");
 })
 
-server.get('/login', myFun, (req, res) => {
-    res.write({msg:'Welcome to Login Page'});
-    res.end();
+// CRUD
+// Create User
+
+app.post('/user', (req, res) => {
+    // console.log(req.body);
+    res.push(req.body);
+    res.json({message:'User Added Success'});
+});
+
+// Read - Get All Users
+server.get('/user', (req, res) => {
+    res.json(users);
 })
 
-server.post('/', (req, res) => {
-    // res.write('Welcome to Post Method');
-    res.send('Welcome to Post Method');
+// Get Single Users
+app.get("/user/:id", (req, res) => {
+    let id = +req.params.id;
+    let item = users.find((user)=>user.id === id);
+    res.json(item);
 })
 
 
-server.listen(8000, () => {
-    console.log('Server Start at http://localhost8000');
+server.listen(1212, () => {
+    console.log('Server Start at http://localhost1212');
 });
