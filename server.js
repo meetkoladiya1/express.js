@@ -36,6 +36,32 @@ app.get("/user/:id", (req, res) => {
 })
 
 
+// Replace Data -  PUT
+app.put("/user/:id", (req, res) => {
+    let id = +req.params.id;
+    let userIndex = users.findIndex((item) => item.id === id);
+    users.splice(userIndex, 1, req.body);
+    res.json({message: "User Replaced Success"});
+})
+
+// Update Data -  PATCH
+app.patch("/user/:id", (req, res) => {
+    let id = +req.params.id;
+    let userIndex = users.findIndex((item) => item.id === id);
+    let user = users[userIndex];
+    users.splice(userIndex, 1, {...user,...req.body});
+    res.json({message: "User Update Success"});
+})
+
+// Delete Data -  DELETE
+app.delete("/user/:id", (req, res) => {
+    let id = +req.params.id;
+    let userIndex = users.findIndex((item) => item.id === id);
+    users.splice(userIndex, 1);
+    res.json({message: "User Delete Success"});
+})
+
+
 server.listen(1212, () => {
     console.log('Server Start at http://localhost1212');
 });
