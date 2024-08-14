@@ -11,14 +11,14 @@ const{
 
 productRoutes.post('/', addNewProduct);
 
-productRoutes.get('/', getAllProduct)
+// productRoutes.get('/', getAllProduct)
 
-productRoutes.get("/:id", getProduct)
+// productRoutes.get("/:id", getProduct)
 
-productRoutes.put("/:id", replaceProduct)
+// productRoutes.put("/:id", replaceProduct)
 
-productRoutes.patch("/:id", updateProduct)
+// productRoutes.patch("/:id", updateProduct)
 
-productRoutes.delete("/:id", deleteProduct)
+// productRoutes.delete("/:id", deleteProduct)
 
 module.exports = productRoutes;
