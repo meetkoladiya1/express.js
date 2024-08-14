@@ -1,9 +1,14 @@
-const producttitle = require("../product.json");
+const Product = require("../model/product.model")
 
 exports.addNewProduct =async (req, res) => {
     try{
-        const user = await User.create(req.body);
-        res.status(201).json({user, message: "User Addede Success"});
+        let title = await Product.findOne({title: req.body.title});
+        // console.log(product);
+        if(title){
+            return res.status(400).json({message: "Product already exists"});
+        }
+        title = await Product.create(req.body);
+        res.status(201).json({title, message: "User Addede Success"});
     } catch (err) {
         console.log(err);
         res.status(500).json({message: "Internal Server Error"});
@@ -11,15 +16,31 @@ exports.addNewProduct =async (req, res) => {
     }
 };
 
-// exports.getAllProduct = (req, res) => {
-//     res.json(producttitle);
-// };
+exports.getAllProduct =async (req, res) => {
+    try{
+        let titles = await Product.find();
+        res.status(200).json(titles);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message: "Internal Server Error"});
+    }
+};
 
-// exports.getProduct = (req, res) => {
-//     let id = +req.params.id;
-//     let item = producttitle.find((product)=>product.id === id);
-//     res.json(item);
-// };
+exports.getProduct =async (req, res) => {
+    try{
+        // let titles = await Product.findOne({title: req.query.title});
+        // let titles = await Product.findOne({_id: req.query.productId});
+        let titles = await Product.findById(req.query.productId);
+        console.log(titles);
+        if(!titles) {
+            return res.status(404).json({message: "Product not found"});
+        }
+        res.status(200).json(titles);
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({message: "Internal Server Error"});
+    }
+};
 
 // exports.replaceProduct = (req, res) => {
 //     let id = +req.params.id;

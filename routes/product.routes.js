@@ -11,9 +11,9 @@ const{
 
 productRoutes.post('/', addNewProduct);
 
-// productRoutes.get('/', getAllProduct)
+productRoutes.get('/', getAllProduct)
 
-// productRoutes.get("/:id", getProduct)
+productRoutes.get("/get-product", getProduct)
 
 // productRoutes.put("/:id", replaceProduct)
 

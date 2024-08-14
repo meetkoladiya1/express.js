@@ -1,21 +1,15 @@
 const mongoose = require('mongoose');
 
 const productSchema = mongoose.Schema({
-    firstName : String,
-    lastName : {
-        type:String
+    title : String,
+    oldprice : {
+        type:Number
     },
-    email : {
-        type : String
-    },
-    age : {
+    price : {
         type : Number
     },
-    hobbies : [{type:String}],
-    address : {
-        line1 : String,
-        line2 : String,
-        pincode : Number
+    category : {
+        type : String
     }
 });
 
