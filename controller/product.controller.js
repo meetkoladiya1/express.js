@@ -42,24 +42,34 @@ exports.getProduct =async (req, res) => {
     }
 };
 
-// exports.replaceProduct = (req, res) => {
-//     let id = +req.params.id;
-//     let productIndex = producttitle.findIndex((item) => item.id === id);
-//     producttitle.splice(productIndex, 1, req.body);
-//     res.json({message: "Product Replaced Success"});
-// };
+exports.updateProduct = async (req, res) => {
+    try{
+        let titles = await Product.findById(req.query.productId);
+        if(!titles) {
+            return res.status(404).json({message: 'Product not found.....'});
+        }
+        // titles = await Product.updateOne({_id:titles._id}, req.body, {new: true});
+        // titles = await Product.findOneAndUpdate({_id: titles._id}, req.body, {new: true});
+        titles = await Product.findByIdAndUpdate(titles._id,{$set: req.body}, {new: true});
+        res.status(202).json({titles, message: "Product Updated successfully"});
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message: "Internal Server Error"});
+    }
+}
 
-// exports.updateProduct = (req, res) => {
-//     let id = +req.params.id;
-//     let productIndex = producttitle.findIndex((item) => item.id === id);
-//     let product = producttitle[productIndex];
-//     producttitle.splice(productIndex, 1, {...product,...req.body});
-//     res.json({message: "Product Update Success"});
-// };
-
-// exports.deleteProduct = (req, res) => {
-//     let id = +req.params.id;
-//     let productIndex = producttitle.findIndex((item) => item.id === id);
-//     producttitle.splice(productIndex, 1);
-//     res.json({message: "Product Delete Success"});
-// };
+exports.deleteProduct = async (req, res) => {
+    try{
+        let titles = await Product.findById(req.query.productId);
+        if(!titles) {
+            return res.status(404).json({message: 'Product not found.....'});
+        }
+        // titles = await Product.deleteOne({_id: titles._id});
+        titles = await Product.findOneAndDelete({_id: titles._id});
+        // titles = await Product.findByIdAndDelete(user._id);
+        res.status(200).json({titles, message: "Product Delete successfully"});
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message: "Internal Server Error"});
+    }
+}

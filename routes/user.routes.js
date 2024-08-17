@@ -4,7 +4,6 @@ const {
     addNewUser,
     getAllUsers,
     getUser,
-    replaceUser,
     updateUser,
     deleteUser
 } = require("../controller/user.controller")
@@ -15,10 +14,8 @@ userRoutes.get('/', getAllUsers)
 
 userRoutes.get("/get-user", getUser)
 
-// userRoutes.put("/:id", replaceUser)
+userRoutes.put("/", updateUser)
 
-// userRoutes.patch("/:id", updateUser)
-
-// userRoutes.delete("/:id", deleteUser)
+userRoutes.delete("/", deleteUser)
 
 module.exports = userRoutes;

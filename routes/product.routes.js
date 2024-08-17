@@ -4,7 +4,6 @@ const{
     addNewProduct,
     getAllProduct,
     getProduct,
-    replaceProduct,
     updateProduct,
     deleteProduct
 } = require("../controller/product.controller")
@@ -15,10 +14,8 @@ productRoutes.get('/', getAllProduct)
 
 productRoutes.get("/get-product", getProduct)
 
-// productRoutes.put("/:id", replaceProduct)
+productRoutes.put("/", updateProduct)
 
-// productRoutes.patch("/:id", updateProduct)
-
-// productRoutes.delete("/:id", deleteProduct)
+productRoutes.delete("/", deleteProduct)
 
 module.exports = productRoutes;
