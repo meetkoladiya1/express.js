@@ -1,21 +1,11 @@
 const express = require('express');
 const productRoutes = express.Router();
 const{
-    addNewProduct,
-    getAllProduct,
-    getProduct,
-    updateProduct,
-    deleteProduct
+    registerProduct,
+    loginProduct
 } = require("../controller/product.controller")
 
-productRoutes.post('/', addNewProduct);
-
-productRoutes.get('/', getAllProduct)
-
-productRoutes.get("/get-product", getProduct)
-
-productRoutes.put("/", updateProduct)
-
-productRoutes.delete("/", deleteProduct)
+productRoutes.post('/', registerProduct);
+productRoutes.post('/', loginProduct);
 
 module.exports = productRoutes;

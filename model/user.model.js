@@ -6,7 +6,17 @@ const userSchema = mongoose.Schema({
         type:String
     },
     email : {
-        type : String
+        type : String,
+        unique: true,
+    },
+    password : {
+        type: String,
+    },
+    mobileNo : {
+        type : String,
+    },
+    profileImage : {
+        type: String,
     },
     age : {
         type : Number
@@ -16,7 +26,15 @@ const userSchema = mongoose.Schema({
         line1 : String,
         line2 : String,
         pincode : Number
+    },
+    isDelete : {
+        type: Boolean,
+        default: false,
     }
+    
+},{
+    versionKey : false,
+    timestamps: true
 });
 
 module.exports = mongoose.model('users', userSchema);

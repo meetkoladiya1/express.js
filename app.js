@@ -5,8 +5,7 @@ const app = express();
 const mongoose = require('mongoose'); 
 const userRoutes = require('./routes/user.routes') 
 const port = process.env.PORT
-const dbURL = process.env.MONGO_URL
-
+const productRoutes = require("./routes/product.routes");
 
 app.use(morgan("dev"));
 app.use(express.json());
@@ -18,11 +17,12 @@ app.get("/", (req, res) => {
 })
 
 app.use("/api/user", userRoutes);
+// app.use("/api/product", productRoutes);
 
-app.listen(dbURL, () => {
+app.listen(port, () => {
     //Database Connection
     mongoose
-    .connect(dbURL)
+    .connect(process.env.MONGO_URL)
     .then(() => console.log("Databasse Connection established Success ..."))
     .catch((err) => console.error(err));
     console.log(`Server Start at http://localhost:${port}`);
