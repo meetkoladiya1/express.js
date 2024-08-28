@@ -9,6 +9,6 @@ const { verifyToken, verifyTokenProduct } = require('../helpers/verifyToken');
 
 productRoutes.post('/register', registerProduct);
 productRoutes.post('/login', loginProduct);
-productRoutes.get('/me', verifyTokenProduct, getProfile);
+// productRoutes.get('/me', verifyTokenProduct, getProfile);
 
 module.exports = productRoutes;
