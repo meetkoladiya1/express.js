@@ -19,10 +19,10 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", userRoutes);
 
-app.listen(dbURL, () => {
+app.listen(port, () => {
     //Database Connection
-    mongoose
-    .connect(dbURL)
+    mongoose    
+    .connect(process.env.dbURL)
     .then(() => console.log("Databasse Connection established Success ..."))
     .catch((err) => console.error(err));
     console.log(`Server Start at http://localhost:${port}`);
