@@ -11,9 +11,6 @@ const productSchema = mongoose.Schema({
     productImage : {
         type: String,
     },
-    category : {
-        type : String
-    },
     isDelete : {
         type: Boolean,
         default: false,

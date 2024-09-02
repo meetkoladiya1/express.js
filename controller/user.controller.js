@@ -63,3 +63,36 @@ exports.updateProfile = async (req, res) => {
         res.status(500).json({message : 'Server Error'});
     }
 }
+
+exports.deleteProfile = async (req, res) => {
+    try {
+        let user = req.user;
+        user = await User.findByIdAndDelete ( user._id, {$set: req.body}, {new: true} );
+        res.status(202).json({user, message : 'User Profile Delete ...'});
+    } catch (error) {
+        console.log(err);
+        res.status(500).json({message : 'Server Error'});
+    }
+}
+
+exports.specialUser = async (req, res) => {
+    try{
+        let user = {
+            firstName: 'Varun',
+            lastName: 'Dhawan',
+            age: 26,
+            email: 'vdhavan@test.in',
+            mobileNo: "123457890",
+            hobbies: ['Travel', 'Gym']
+        };
+        // let user = await User.findOne({firstName: req.query.name, isDelete: false});
+        // if(!user){
+        //     return res.render('notfound.ejs');
+        // }
+        // res.render('student.hbs', {user});
+        // res.render('user.ejs', {user});
+    } catch (err){
+        console.log(err);
+        res.status(500).json({message: "Server Error"});
+    }
+}

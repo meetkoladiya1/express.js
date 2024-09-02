@@ -5,10 +5,10 @@ const{
     loginProduct,
     getProfile
 } = require("../controller/product.controller")
-const { verifyToken, verifyTokenProduct } = require('../helpers/verifyToken');
+const { verifyToken } = require('../helpers/verifyToken');
 
 productRoutes.post('/register', registerProduct);
 productRoutes.post('/login', loginProduct);
-// productRoutes.get('/me', verifyTokenProduct, getProfile);
+productRoutes.get('/me', verifyToken, getProfile);
 
 module.exports = productRoutes;
