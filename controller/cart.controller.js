@@ -21,7 +21,7 @@ exports.addtoCart = async (req, res) => {
     }
 };
 
-exports.getAllcart = async(req,res) =>{
+exports.getAllCarts = async(req,res) =>{
     try {
         let carts = await Cart.find({user: req.user._id,isDelete:false});
         res.json(carts)
@@ -31,7 +31,7 @@ exports.getAllcart = async(req,res) =>{
     }
 }
 
-exports.updatecart = async(req,res)=>{
+exports.updateCart = async(req,res)=>{
     try{
       let cart = await Cart.findOne({_id: req.query.cartId})
       if(!cart){
@@ -49,7 +49,7 @@ exports.updatecart = async(req,res)=>{
     }
 }
 
-exports.deletecart = async (req,res) =>{
+exports.deleteCart = async (req,res) =>{
     try {
           let cart = await Cart.findByIdAndUpdate({_id:req.query.cartId,isDelete:"false"});
           if(!cart){
